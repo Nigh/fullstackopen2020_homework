@@ -1,2 +1,2 @@
-# fullstackopen2020_homework
-exercises repo for fullstackopen2020
+# [fullstackopen2020](https://fullstackopen.com/)
+This repo is for committing exercises for fullstackopen-2020
