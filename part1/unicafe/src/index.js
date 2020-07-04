@@ -6,7 +6,10 @@ const Button = ({ name, handler }) => (
 )
 
 const Statistic = ({ name, value }) => (
-	<li key={name}>{name}:{value}</li>
+	<tr>
+		<td>{name}</td>
+		<td>{value}</td>
+	</tr>
 )
 
 const Statistics = ({ good, neutral, bad }) => {
@@ -20,8 +23,8 @@ const Statistics = ({ good, neutral, bad }) => {
 		<Statistic name='neutral' value={neutral} />
 		<Statistic name='bad' value={bad} />
 		<Statistic name='All' value={good + neutral + bad} />
-		<Statistic name='Average' value={(good + bad) / (good + neutral + bad)} />
-		<Statistic name='Positive' value={good / (good + neutral + bad) * 100 + '%'} />
+		<Statistic name='Average' value={((good + bad) / (good + neutral + bad)).toFixed(2)} />
+		<Statistic name='Positive' value={(good / (good + neutral + bad) * 100).toFixed(2) + '%'} />
 	</div>)
 }
 
