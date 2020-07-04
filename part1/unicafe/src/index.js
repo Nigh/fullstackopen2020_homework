@@ -5,7 +5,7 @@ const Button = ({ name, handler }) => (
 	<button onClick={handler}>{name}</button>
 )
 
-const Stat = ({ name, number }) => (
+const Statistics = ({ name, number }) => (
 	<li key={name}>{name}:{number}</li>
 )
 
@@ -24,12 +24,12 @@ const App = () => {
 			<Button name='neutral' handler={counter({ v: neutral, func: setNeutral })} />
 			<Button name='bad' handler={counter({ v: bad, func: setBad })} />
 			<h2>Statitics</h2>
-			<Stat name='good' number={good} />
-			<Stat name='neutral' number={neutral} />
-			<Stat name='bad' number={bad} />
-			<Stat name='All' number={good + neutral + bad} />
-			<Stat name='Average' number={(good + bad) / (good + neutral + bad)} />
-			<Stat name='Positive' number={good / (good + neutral + bad) * 100 + '%'} />
+			<Statistics name='good' number={good} />
+			<Statistics name='neutral' number={neutral} />
+			<Statistics name='bad' number={bad} />
+			<Statistics name='All' number={good + neutral + bad} />
+			<Statistics name='Average' number={(good + bad) / (good + neutral + bad)} />
+			<Statistics name='Positive' number={good / (good + neutral + bad) * 100 + '%'} />
 		</div>
 	)
 }
