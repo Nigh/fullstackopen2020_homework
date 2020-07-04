@@ -18,14 +18,14 @@ const Statistics = ({ good, neutral, bad }) => {
 			<div>No feedback given</div>
 		)
 	}
-	return (<div>
+	return (<table border="1"> <tbody>
 		<Statistic name='good' value={good} />
 		<Statistic name='neutral' value={neutral} />
 		<Statistic name='bad' value={bad} />
 		<Statistic name='All' value={good + neutral + bad} />
 		<Statistic name='Average' value={((good + bad) / (good + neutral + bad)).toFixed(2)} />
 		<Statistic name='Positive' value={(good / (good + neutral + bad) * 100).toFixed(2) + '%'} />
-	</div>)
+	</tbody></table>)
 }
 
 const App = () => {
