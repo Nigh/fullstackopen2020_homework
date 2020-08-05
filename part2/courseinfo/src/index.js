@@ -26,13 +26,15 @@ const Content = ({ course }) => {
 }
 
 const Total = ({ course }) => {
-	let total = 0
 	const { parts } = course
-	parts.forEach(part => {
-		total += part.exercises
-	});
+	const reducer = (acc, value) => {
+		let add = acc.exercises + value.exercises
+		return (
+			{ exercises: add }
+		)
+	}
 	return (
-		<p>Total of {total} exercises</p>
+		<p>Total of {parts.reduce(reducer).exercises} exercises</p>
 	)
 }
 
