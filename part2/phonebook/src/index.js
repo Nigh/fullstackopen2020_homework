@@ -10,6 +10,7 @@ const App = () => {
 		console.log(event.target.value)
 		setNewName(event.target.value)
 	}
+	const dupAlert = `${newName} is existed.`
 	return (
 		<div>
 			<h2>Phonebook</h2>
@@ -20,8 +21,14 @@ const App = () => {
 				<div>
 					<button type="submit" onClick={(event) => {
 						event.preventDefault()
-						// console.log({ name:  newName  });
-						setPersons(persons.concat({ name: newName }))
+						if (persons.find(person => person.name === newName)) {
+							alert(dupAlert)
+						} else if (newName === "") {
+							alert("Empty Input")
+						} else {
+							// console.log({ name:  newName  });
+							setPersons(persons.concat({ name: newName }))
+						}
 					}}>add</button>
 				</div>
 			</form>
