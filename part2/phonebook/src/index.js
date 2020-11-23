@@ -1,5 +1,8 @@
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import PhoneBookShow from './components/PhoneBookShow'
 
 const App = () => {
 	const [persons, setPersons] = useState([
@@ -8,62 +11,15 @@ const App = () => {
 		{ name: 'Dan Abramov', num: '12-43-234345' },
 		{ name: 'Mary Poppendieck', num: '39-23-6423122' }
 	])
-	const [newName, setNewName] = useState('')
-	const [newNumber, setNewNumber] = useState('')
-	const [filter, setFilter] = useState('')
+	const [filted, setFilted] = useState(persons)
 
-	const phonebookToShow = filter === ''
-		? persons
-		: persons.filter(person => person.name.search(filter) != -1)
-
-	const handleFilter = (event) => {
-		setFilter(event.target.value)
-	}
-	const handleNewName = (event) => {
-		setNewName(event.target.value)
-	}
-	const handleNewNumber = (event) => {
-		setNewNumber(event.target.value)
-	}
-	const dupAlert = `${newName} is existed.`
 	return (
 		<div>
-			<h2>Filter (Regexpress support)</h2>
-			<div>
-				Filter: <input value={filter} onChange={handleFilter} />
-			</div>
+			<Filter persons={persons} setFilted={setFilted} />
 			<h2>Phonebook</h2>
-			<form>
-				<div>
-					name: <input value={newName} onChange={handleNewName} />
-				</div>
-				<div>
-					Number: <input value={newNumber} onChange={handleNewNumber} />
-				</div>
-				<div>
-					<button type="submit" onClick={(event) => {
-						event.preventDefault()
-						if (persons.find(person => person.name === newName)) {
-							alert(dupAlert)
-						} else if (newName === "") {
-							alert("Empty Input")
-						} else {
-							// console.log({ name:  newName  });
-							setPersons(persons.concat({ name: newName, num: newNumber }))
-						}
-					}}>add</button>
-				</div>
-			</form>
+			<PersonForm persons={persons} setPersons={setPersons} />
 			<h2>Numbers</h2>
-			<ul>
-				{
-					phonebookToShow.map(
-						({ name, num }) => <li key={name}>
-							<tr><td>{name}</td>:<td>{num}</td></tr>
-						</li>
-					)
-				}
-			</ul>
+			<PhoneBookShow phonebookToShow={filted} />
 		</div>
 	)
 }
