@@ -6,3 +6,5 @@ This repo is for committing exercises for fullstackopen-2020
 `sudo apt install nodejs npm`
 
 `sudo npm install react -g`
+
+`npm config set registry https://registry.npm.taobao.org`
