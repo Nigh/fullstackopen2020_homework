@@ -3,10 +3,13 @@ This repo is for committing exercises for fullstackopen-2020
 
 ## Env
 
-`sudo apt install nodejs npm`
+```shell
+sudo apt install nodejs npm
+npm config set registry https://registry.npm.taobao.org
+sudo npm install react -g
+```
 
-`sudo npm install react -g`
-
-`npm config set registry https://registry.npm.taobao.org`
-
-`npm install -g json-server`
+开发用服务端：
+```shell
+sudo npm install -g json-server
+```
