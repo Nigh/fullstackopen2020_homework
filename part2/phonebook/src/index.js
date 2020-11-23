@@ -3,21 +3,35 @@ import React, { useState } from 'react'
 
 const App = () => {
 	const [persons, setPersons] = useState([
-		{ name: 'Arto Hellas', num: '12345678' }
+		{ name: 'Arto Hellas', num: '040-123456' },
+		{ name: 'Ada Lovelace', num: '39-44-5323523' },
+		{ name: 'Dan Abramov', num: '12-43-234345' },
+		{ name: 'Mary Poppendieck', num: '39-23-6423122' }
 	])
 	const [newName, setNewName] = useState('')
 	const [newNumber, setNewNumber] = useState('')
+	const [filter, setFilter] = useState('')
+
+	const phonebookToShow = filter === ''
+		? persons
+		: persons.filter(person => person.name.search(filter) != -1)
+
+	const handleFilter = (event) => {
+		setFilter(event.target.value)
+	}
 	const handleNewName = (event) => {
-		// console.log(event.target.value)
 		setNewName(event.target.value)
 	}
 	const handleNewNumber = (event) => {
-		// console.log(event.target.value)
 		setNewNumber(event.target.value)
 	}
 	const dupAlert = `${newName} is existed.`
 	return (
 		<div>
+			<h2>Filter (Regexpress support)</h2>
+			<div>
+				Filter: <input value={filter} onChange={handleFilter} />
+			</div>
 			<h2>Phonebook</h2>
 			<form>
 				<div>
@@ -43,7 +57,7 @@ const App = () => {
 			<h2>Numbers</h2>
 			<ul>
 				{
-					persons.map(
+					phonebookToShow.map(
 						({ name, num }) => <li key={name}>
 							<tr><td>{name}</td>:<td>{num}</td></tr>
 						</li>
