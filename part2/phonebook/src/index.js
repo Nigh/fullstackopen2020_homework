@@ -3,12 +3,17 @@ import React, { useState } from 'react'
 
 const App = () => {
 	const [persons, setPersons] = useState([
-		{ name: 'Arto Hellas' }
+		{ name: 'Arto Hellas', num: '12345678' }
 	])
 	const [newName, setNewName] = useState('')
+	const [newNumber, setNewNumber] = useState('')
 	const handleNewName = (event) => {
-		console.log(event.target.value)
+		// console.log(event.target.value)
 		setNewName(event.target.value)
+	}
+	const handleNewNumber = (event) => {
+		// console.log(event.target.value)
+		setNewNumber(event.target.value)
 	}
 	const dupAlert = `${newName} is existed.`
 	return (
@@ -19,6 +24,9 @@ const App = () => {
 					name: <input value={newName} onChange={handleNewName} />
 				</div>
 				<div>
+					Number: <input value={newNumber} onChange={handleNewNumber} />
+				</div>
+				<div>
 					<button type="submit" onClick={(event) => {
 						event.preventDefault()
 						if (persons.find(person => person.name === newName)) {
@@ -27,17 +35,21 @@ const App = () => {
 							alert("Empty Input")
 						} else {
 							// console.log({ name:  newName  });
-							setPersons(persons.concat({ name: newName }))
+							setPersons(persons.concat({ name: newName, num: newNumber }))
 						}
 					}}>add</button>
 				</div>
 			</form>
 			<h2>Numbers</h2>
-			{
-				persons.map(
-					({ name }) => <li key={name}>{name}</li>
-				)
-			}
+			<ul>
+				{
+					persons.map(
+						({ name, num }) => <li key={name}>
+							<tr><td>{name}</td>:<td>{num}</td></tr>
+						</li>
+					)
+				}
+			</ul>
 		</div>
 	)
 }
