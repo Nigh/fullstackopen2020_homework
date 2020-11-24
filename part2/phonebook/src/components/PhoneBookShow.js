@@ -6,8 +6,8 @@ const PhoneBookShow = ({ phonebookToShow }) => {
 			<thead><tr><th>name</th><th>number</th></tr></thead>
 			<tbody>
 				{
-					phonebookToShow.map(({ name, num }) =>
-						<tr key={name}><td>{name}</td><td>{num}</td></tr>
+					phonebookToShow.map(({ name, number }) =>
+						<tr key={name}><td>{name}</td><td>{number}</td></tr>
 					)
 				}
 			</tbody>

@@ -28,7 +28,7 @@ const PersonForm = ({ persons, setPersons }) => {
 					} else if (newName === "") {
 						alert("Empty Input")
 					} else {
-						setPersons(persons.concat({ name: newName, num: newNumber }))
+						setPersons(persons.concat({ name: newName, number: newNumber }))
 					}
 				}}>add</button>
 			</div>
