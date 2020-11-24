@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
+import PhoneBookService from "../services/phonebook"
 
-const PersonForm = ({ persons, setPersons }) => {
-
-	const [newName, setNewName] = useState('')
-	const [newNumber, setNewNumber] = useState('')
+const PersonForm = ({ filted, setFilted, persons, setPersons }) => {
+	const [newName, setNewName] = useState("")
+	const [newNumber, setNewNumber] = useState("")
 
 	const handleNewName = (event) => {
 		setNewName(event.target.value)
@@ -11,7 +11,22 @@ const PersonForm = ({ persons, setPersons }) => {
 	const handleNewNumber = (event) => {
 		setNewNumber(event.target.value)
 	}
-	const dupAlert = `${newName} is existed.`
+
+	const submitHandler = (event) => {
+		event.preventDefault()
+		let newPerson = { name: newName, number: newNumber }
+		if (persons.find((person) => person.name === newPerson.name)) {
+			alert(`${newPerson.name} is existed.`)
+		} else if (newPerson.name === "") {
+			alert("Empty Input")
+		} else {
+			PhoneBookService.append(newPerson).then((newOne) => {
+				setPersons(persons.concat(newOne))
+				setFilted(filted.concat(newOne))
+			})
+		}
+	}
+
 	return (
 		<form>
 			<div>
@@ -21,16 +36,9 @@ const PersonForm = ({ persons, setPersons }) => {
 				Number: <input value={newNumber} onChange={handleNewNumber} />
 			</div>
 			<div>
-				<button type="submit" onClick={(event) => {
-					event.preventDefault()
-					if (persons.find(person => person.name === newName)) {
-						alert(dupAlert)
-					} else if (newName === "") {
-						alert("Empty Input")
-					} else {
-						setPersons(persons.concat({ name: newName, number: newNumber }))
-					}
-				}}>add</button>
+				<button type="submit" onClick={submitHandler}>
+					add
+				</button>
 			</div>
 		</form>
 	)
