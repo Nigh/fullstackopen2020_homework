@@ -15,8 +15,30 @@ const PersonForm = ({ filted, setFilted, persons, setPersons }) => {
 	const submitHandler = (event) => {
 		event.preventDefault()
 		let newPerson = { name: newName, number: newNumber }
-		if (persons.find((person) => person.name === newPerson.name)) {
-			alert(`${newPerson.name} is existed.`)
+		let samePerson = persons.find(
+			(person) => person.name === newPerson.name
+		)
+		if (samePerson) {
+			if (
+				window.confirm(
+					`${newPerson.name} already exist. Replace old number with new one?`
+				)
+			) {
+				PhoneBookService.update(samePerson.id, newPerson).then(
+					(resp) => {
+						setPersons(
+							persons.map((person) =>
+								person.id !== samePerson.id ? person : resp
+							)
+						)
+						setFilted(
+							filted.map((person) =>
+								person.id !== samePerson.id ? person : resp
+							)
+						)
+					}
+				)
+			}
 		} else if (newPerson.name === "") {
 			alert("Empty Input")
 		} else {
