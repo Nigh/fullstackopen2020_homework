@@ -4,10 +4,13 @@ import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
 import PhoneBookShow from "./components/PhoneBookShow"
 import PhoneBookService from "./services/phonebook"
+import Notify from "./components/Notify"
+import "./index.css"
 
 const App = () => {
 	const [persons, setPersons] = useState([])
 	const [filted, setFilted] = useState(persons)
+	const [notice, setNotice] = useState({ msg: null, type: "error" })
 
 	useEffect(() => {
 		PhoneBookService.getAll().then((persons) => {
@@ -15,8 +18,15 @@ const App = () => {
 			setFilted(persons)
 		})
 	}, [])
+	const CreateNotice = ({ msg, type }) => {
+		setNotice({ msg, type })
+		setTimeout(() => {
+			setNotice({ msg: null, type: null })
+		}, 5000)
+	}
 	return (
 		<div>
+			<Notify msg={notice.msg} type={notice.type} />
 			<Filter persons={persons} setFilted={setFilted} />
 			<h2>Phonebook</h2>
 			<PersonForm
@@ -24,6 +34,7 @@ const App = () => {
 				setFilted={setFilted}
 				persons={persons}
 				setPersons={setPersons}
+				createNotice={CreateNotice}
 			/>
 			<h2>Numbers</h2>
 			<PhoneBookShow
@@ -31,6 +42,7 @@ const App = () => {
 				setFilted={setFilted}
 				persons={persons}
 				setPersons={setPersons}
+				createNotice={CreateNotice}
 			/>
 		</div>
 	)

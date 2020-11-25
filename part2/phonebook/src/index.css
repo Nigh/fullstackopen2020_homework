@@ -1,0 +1,20 @@
+div.notify p {
+	background-color: whitesmoke;
+	font-size: large;
+	border-style: solid;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+div.notify p.error {
+	color: red;
+}
+
+div.notify p.notice {
+	color: yellow;
+	background-color: black;
+}
+
+div.notify p.success {
+	color: yellowgreen;
+}
