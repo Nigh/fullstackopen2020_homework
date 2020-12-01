@@ -35,6 +35,18 @@ app.get("/info", (req, res) => {
 	<br>${date.toLocaleString()}
 	`)
 })
+
+app.get("/api/persons/:id", (req, res) => {
+	const ret = persons.filter(
+		(person) => person.id.toString() === req.params.id
+	)
+	if (ret.length > 0) {
+		res.json(ret)
+	} else {
+		res.status(404).end()
+	}
+})
+
 app.get("/api/persons", (req, res) => {
 	res.json(persons)
 })
