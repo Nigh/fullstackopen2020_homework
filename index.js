@@ -1,5 +1,7 @@
 const express = require("express")
 const app = express()
+var morgan = require("morgan")
+
 let persons = [
 	{
 		name: "Arto Hellas",
@@ -23,8 +25,16 @@ let persons = [
 	},
 ]
 
+morgan.token("json-content", function (req, res) {
+	return JSON.stringify(req.body)
+})
 let date = new Date()
 app.use(express.json())
+app.use(
+	morgan(
+		":method :url :status :res[content-length] - :response-time ms - :json-content"
+	)
+)
 
 app.get("/", (req, res) => {
 	res.send(`<h1>Hello World</h1>`)
