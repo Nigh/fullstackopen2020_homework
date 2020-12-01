@@ -1,5 +1,5 @@
-const app = require("express")()
-
+const express = require("express")
+const app = express()
 let persons = [
 	{
 		name: "Arto Hellas",
@@ -24,6 +24,7 @@ let persons = [
 ]
 
 let date = new Date()
+app.use(express.json())
 
 app.get("/", (req, res) => {
 	res.send(`<h1>Hello World</h1>`)
@@ -62,6 +63,30 @@ app.delete("/api/persons/:id", (req, res) => {
 	} else {
 		res.status(404).end()
 	}
+})
+
+app.post("/api/persons", (req, res) => {
+	const body = req.body
+	if (!body.name || !body.number) {
+		return res.status(400).json({
+			error: "name or number missing",
+		})
+	}
+
+	if (persons.find((p) => p.name === body.name)) {
+		return res.status(400).json({
+			error: "name duplicate",
+		})
+	}
+
+	const newPerson = {
+		name: body.name,
+		number: body.number,
+		id: Math.random() * 100000000000,
+	}
+	persons = persons.concat(newPerson)
+
+	res.json(persons)
 })
 
 const PORT = 3001
