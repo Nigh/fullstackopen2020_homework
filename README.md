@@ -20,5 +20,6 @@ sudo npm install -g json-server
 
 ```shell
 npm install express
+npm install --save-dev nodemon
 npm install morgan
 ```
