@@ -9,7 +9,16 @@ npm config set registry https://registry.npm.taobao.org
 sudo npm install react -g
 ```
 
+### Part2
+
 开发用服务端：
 ```shell
 sudo npm install -g json-server
+```
+
+### Part3
+
+```shell
+npm install express
+npm install morgan
 ```
