@@ -31,6 +31,7 @@ morgan.token("json-content", function (req, res) {
 })
 let date = new Date()
 app.use(cors())
+app.use(express.static("build"))
 app.use(express.json())
 app.use(
 	morgan(
@@ -94,7 +95,7 @@ app.post("/api/persons", (req, res) => {
 	const newPerson = {
 		name: body.name,
 		number: body.number,
-		id: Math.random() * 100000000000,
+		id: Math.round(Math.random() * 10000000000000),
 	}
 	persons = persons.concat(newPerson)
 
