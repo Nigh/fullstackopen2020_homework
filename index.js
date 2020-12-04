@@ -98,7 +98,7 @@ app.post("/api/persons", (req, res) => {
 	}
 	persons = persons.concat(newPerson)
 
-	res.json(persons)
+	res.json(newPerson)
 })
 
 const PORT = process.env.PORT || 3001
