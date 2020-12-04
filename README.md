@@ -22,4 +22,5 @@ sudo npm install -g json-server
 npm install express
 npm install --save-dev nodemon
 npm install --save-dev morgan
+npm install cors
 ```
