@@ -21,31 +21,26 @@ const PhoneBookShow = ({
 				})
 				.catch((reason) => {
 					console.log(reason)
-					createNotice({ msg: "Delete Failed. Refresh the page may fix it.", type: "error" })
+					createNotice({
+						msg: "Delete Failed. Refresh the page may fix it.",
+						type: "error",
+					})
 				})
 		}
 	}
 	return (
-		<table border="1">
-			<thead>
-				<tr>
-					<th>name</th>
-					<th>number</th>
-				</tr>
-			</thead>
-			<tbody>
-				{filted.map(({ name, number, id }) => (
-					<>
-						<Person
-							name={name}
-							number={number}
-							id={id}
-							removeFunc={() => removeID(id)}
-						/>
-					</>
-				))}
-			</tbody>
-		</table>
+		<>
+			{filted.map(({ name, number, id }) => (
+				<>
+					<Person
+						name={name}
+						number={number}
+						id={id}
+						removeFunc={() => removeID(id)}
+					/>
+				</>
+			))}
+		</>
 	)
 }
 
